@@ -1,0 +1,17 @@
+{
+  "name": "DDlog Program",
+  "scopeName": "source.ddlog.dl",
+  "fileTypes": [
+    ".dl"
+  ],
+  "patterns": [
+    {
+      "include": "#PARSE"
+    }
+  ],
+  "repository": {
+    "PARSE": {
+      "patterns": []
+    }
+  }
+}

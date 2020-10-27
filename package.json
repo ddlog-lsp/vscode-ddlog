@@ -1,0 +1,85 @@
+{
+  "name": "vscode-ddlog",
+  "description": "Visual Studio Code client for the DDlog language server",
+  "version": "0.0.1",
+  "license": "Apache-2.0 WITH LLVM-exception",
+  "author": {
+    "name": "Darin Morrison",
+    "email": "darinmorrison@users.noreply.github.com",
+    "url": "https://github.com/darinmorrison"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ddlog-lsp/vscode-ddlog.git"
+  },
+  "displayName": "vscode-ddlog",
+  "publisher": "darinmorrison",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "scripts": {
+    "build": "tsc -p . && node script/syntax.js",
+    "format": "prettier --write '**/*.{js,json,ts,tsx,yml,yaml}'",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}' && prettier --check '**/*.{json,yml,yaml}'",
+    "watch": "tsc -watch -p ."
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.0",
+    "@types/vscode": "^1.50.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "eslint": "^7.12.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2",
+    "typescript": "^4.0.5",
+    "vscode-test": "^1.4.1"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^6.1.3"
+  },
+  "enableProposedApi": true,
+  "main": "./out/extension",
+  "activationEvents": [
+    "onLanguage:ddlog.dat",
+    "onLanguage:ddlog.dl",
+    "workspaceContains:**/*.dat",
+    "workspaceContains:**/*.dl"
+  ],
+  "contributes": {
+    "grammars": [
+      {
+        "language": "ddlog.dat",
+        "scopeName": "source.ddlog.dat",
+        "path": "./contributes/grammars/ddlog-dat.json"
+      },
+      {
+        "language": "ddlog.dl",
+        "scopeName": "source.ddlog.dl",
+        "path": "./contributes/grammars/ddlog-dl.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "ddlog.dat",
+        "aliases": [
+          "DDlog Command Script"
+        ],
+        "extensions": [
+          ".dat"
+        ],
+        "configuration": "./contributes/languages/ddlog-dat.json"
+      },
+      {
+        "id": "ddlog.dl",
+        "aliases": [
+          "DDlog Program"
+        ],
+        "extensions": [
+          ".dl"
+        ],
+        "configuration": "./contributes/languages/ddlog-dl.json"
+      }
+    ]
+  }
+}

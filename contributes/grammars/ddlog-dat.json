@@ -1,0 +1,17 @@
+{
+  "name": "DDlog Command Script",
+  "scopeName": "source.ddlog.dat",
+  "fileTypes": [
+    ".dat"
+  ],
+  "patterns": [
+    {
+      "include": "#PARSE"
+    }
+  ],
+  "repository": {
+    "PARSE": {
+      "patterns": []
+    }
+  }
+}
