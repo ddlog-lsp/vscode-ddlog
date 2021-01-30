@@ -1,13 +1,12 @@
-import * as lspClient from "vscode-languageclient";
+import * as lspClient from "vscode-languageclient/node";
 import * as vscode from "vscode";
 
 export async function launch(context: vscode.ExtensionContext): Promise<lspClient.LanguageClient> {
   const run: lspClient.Executable = {
-    command: "ddlog-lsp-server",
+    command: "ddlog-lsp",
   };
-
   const debug: lspClient.Executable = {
-    command: "ddlog-lsp-server",
+    command: "ddlog-lsp",
     options: {
       env: {
         RUST_LOG: "info",
@@ -15,10 +14,9 @@ export async function launch(context: vscode.ExtensionContext): Promise<lspClien
       },
     },
   };
-
   const serverOptions: lspClient.ServerOptions = { debug, run };
   const clientOptions: lspClient.LanguageClientOptions = {
-    diagnosticCollectionName: "ddlog-lsp-server",
+    diagnosticCollectionName: "ddlog-lsp",
     documentSelector: [
       { language: "ddlog.dat", scheme: "file" },
       { language: "ddlog.dat", scheme: "untitled" },
@@ -32,18 +30,15 @@ export async function launch(context: vscode.ExtensionContext): Promise<lspClien
       ],
     },
   };
-
   const languageClient = new lspClient.LanguageClient(
     "ddlog-lsp-server",
     "DDlog Language Server",
     serverOptions,
     clientOptions,
   );
-
+  languageClient.registerProposedFeatures();
   const session = languageClient.start();
   context.subscriptions.push(session);
-
   await languageClient.onReady();
-
   return languageClient;
 }
