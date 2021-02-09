@@ -9,6 +9,7 @@ export async function launch(context: vscode.ExtensionContext): Promise<lspClien
     command: "ddlog-lsp",
     options: {
       env: {
+        RUST_BACKTRACE: 1,
         RUST_LOG: "info",
         ...process.env,
       },
