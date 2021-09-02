@@ -4,16 +4,16 @@
   "version": "0.0.0",
   "license": "Apache-2.0 WITH LLVM-exception",
   "author": {
-    "name": "hvithrafn",
-    "email": "hvithrafn@users.noreply.github.com",
-    "url": "https://github.com/hvithrafn"
+    "name": "silvanshade",
+    "email": "silvanshade@users.noreply.github.com",
+    "url": "https://github.com/silvanshade"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ddlog-lsp/vscode-ddlog.git"
   },
   "displayName": "vscode-ddlog",
-  "publisher": "hvithrafn",
+  "publisher": "silvanshade",
   "engines": {
     "vscode": "^1.56.0"
   },
