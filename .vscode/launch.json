@@ -21,6 +21,19 @@
       ],
       "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
       "preLaunchTask": "${defaultBuildTask}"
-    }
+    },
+    {
+      "name": "(macOS / Linux) Attach to LSP server",
+      "request": "attach",
+      "type": "lldb",
+      "program": "ddlog-lsp",
+    },
+    {
+      "name": "(Windows) Attach to LSP server",
+      "request": "attach",
+      "type": "cppvsdbg",
+      "processId": "${command:pickProcess}",
+      "program": "ddlog-lsp",
+    },
   ]
 }
