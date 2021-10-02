@@ -42,18 +42,11 @@
   "enableProposedApi": true,
   "main": "./out/extension",
   "activationEvents": [
-    "onLanguage:ddlog.dat",
     "onLanguage:ddlog.dl",
-    "workspaceContains:**/*.dat",
     "workspaceContains:**/*.dl"
   ],
   "contributes": {
     "grammars": [
-      {
-        "language": "ddlog.dat",
-        "scopeName": "source.ddlog.dat",
-        "path": "./contributes/grammars/ddlog-dat.json"
-      },
       {
         "language": "ddlog.dl",
         "scopeName": "source.ddlog.dl",
@@ -61,16 +54,6 @@
       }
     ],
     "languages": [
-      {
-        "id": "ddlog.dat",
-        "aliases": [
-          "DDlog Command Script"
-        ],
-        "extensions": [
-          ".dat"
-        ],
-        "configuration": "./contributes/languages/ddlog-dat.json"
-      },
       {
         "id": "ddlog.dl",
         "aliases": [

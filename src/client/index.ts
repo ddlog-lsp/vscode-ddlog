@@ -19,14 +19,14 @@ export async function launch(context: vscode.ExtensionContext): Promise<lspClien
   const clientOptions: lspClient.LanguageClientOptions = {
     diagnosticCollectionName: "ddlog-lsp",
     documentSelector: [
-      { language: "ddlog.dat", scheme: "file" },
-      { language: "ddlog.dat", scheme: "untitled" },
+      // { language: "ddlog.dat", scheme: "file" },
+      // { language: "ddlog.dat", scheme: "untitled" },
       { language: "ddlog.dl", scheme: "file" },
       { language: "ddlog.dl", scheme: "untitled" },
     ],
     synchronize: {
       fileEvents: [
-        vscode.workspace.createFileSystemWatcher("**/*.dat"),
+        // vscode.workspace.createFileSystemWatcher("**/*.dat"),
         vscode.workspace.createFileSystemWatcher("**/*.dl"),
       ],
     },
