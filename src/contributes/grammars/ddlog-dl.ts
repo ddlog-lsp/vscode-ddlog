@@ -15,8 +15,9 @@ export class DDlogDl implements basis.Render {
       name: "DDlog Program",
       scopeName: "source.ddlog.dl",
       fileTypes: [".dl"],
-      patterns: [include(this.ROOT)],
+      patterns: [include(this.EXTRAS), include(this.ROOT)],
       repository: {
+        EXTRAS: this.EXTRAS(),
         ROOT: this.ROOT(),
         annotated_item: this.annotated_item(),
         apply: this.apply(),
@@ -206,6 +207,12 @@ export class DDlogDl implements basis.Render {
     };
   }
 
+  EXTRAS(): schema.Rule {
+    return {
+      patterns: [include(this.comment_block), include(this.comment_line)],
+    };
+  }
+
   ROOT(): schema.Rule {
     return {
       patterns: [],
@@ -280,13 +287,38 @@ export class DDlogDl implements basis.Render {
 
   comment_block(): schema.Rule {
     return {
-      patterns: [],
+      name: "comment.block.ddlog.dl",
+      begin: "/\\*",
+      end: "\\*/",
+      beginCaptures: {
+        0: {
+          name: "punctuation.definition.comment.ddlog.dl",
+        },
+      },
+      endCaptures: {
+        0: {
+          name: "punctuation.definition.comment.ddlog.dl",
+        },
+      },
     };
   }
 
   comment_line(): schema.Rule {
     return {
-      patterns: [],
+      contentName: "comment.line.double-slash.ddlog.dl",
+      begin: "(^[ \\t]+)?((//)(?=\\s|$))",
+      end: "(?=$)",
+      beginCaptures: {
+        1: {
+          name: "punctuation.whitespace.comment.leading.ddlog.dl",
+        },
+        2: {
+          name: "comment.line.double-slash.ddlog.dl",
+        },
+        3: {
+          name: "punctuation.definition.comment.ddlog.dl",
+        },
+      },
     };
   }
 
