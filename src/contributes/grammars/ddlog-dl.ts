@@ -1176,7 +1176,7 @@ export class DDlogDl implements basis.Render {
             {
               begin: "\bif\b",
               end: "(?=\\))",
-              patterns: [include(this.exp)],
+              patterns: [include(this.atom), include(this.exp)],
             },
           ],
         },
@@ -1187,7 +1187,31 @@ export class DDlogDl implements basis.Render {
 
   statement_if(): schema.Rule {
     return {
-      patterns: [],
+      begin: "\\bif\\b",
+      end: `(?<=${Pattern.statement_end.lookbehind})`,
+      beginCaptures: {
+        0: {
+          name: "keyword.control.conditional.ddlog.dl",
+        },
+      },
+      patterns: [
+        {
+          begin: "\\(",
+          end: "\\)",
+          patterns: [include(this.exp)],
+        },
+        {
+          begin: "\\belse\\b",
+          end: `(?<=${Pattern.statement_end.lookbehind})`,
+          beginCaptures: {
+            0: {
+              name: "keyword.control.conditional.ddlog.dl",
+            },
+          },
+          patterns: [include(this.statement)],
+        },
+        include(this.statement),
+      ],
     };
   }
 
