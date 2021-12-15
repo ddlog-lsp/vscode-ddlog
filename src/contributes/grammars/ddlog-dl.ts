@@ -5,6 +5,12 @@ import * as schema from "./schema";
 
 const { include } = basis;
 
+const Pattern = {
+  statement_end: {
+    lookbehind: "skip|\\}",
+  },
+};
+
 export class DDlogDl implements basis.Render {
   constructor() {
     return this;
@@ -215,13 +221,13 @@ export class DDlogDl implements basis.Render {
 
   ROOT(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [include(this.annotated_item)],
     };
   }
 
   annotated_item(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [include(this.item)],
     };
   }
 
@@ -762,7 +768,17 @@ export class DDlogDl implements basis.Render {
 
   item(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [
+        include(this.statement_for),
+        // include(this.apply),
+        // include(this.import),
+        // include(this.function),
+        // include(this.index),
+        // include(this.rel),
+        // include(this.rule),
+        // include(this.transformer),
+        // include(this.typedef),
+      ],
     };
   }
 
@@ -1104,7 +1120,15 @@ export class DDlogDl implements basis.Render {
 
   statement(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [
+        include(this.statement_assign),
+        include(this.statement_block),
+        include(this.statement_empty),
+        include(this.statement_for),
+        include(this.statement_if),
+        include(this.statement_insert),
+        include(this.statement_match),
+      ],
     };
   }
 
@@ -1116,19 +1140,48 @@ export class DDlogDl implements basis.Render {
 
   statement_block(): schema.Rule {
     return {
-      patterns: [],
+      begin: "{",
+      end: "}",
+      patterns: [
+        {
+          name: "punctuation.terminator.statement.ddlog.dl",
+          match: ";",
+        },
+        include(this.statement),
+      ],
     };
   }
 
   statement_empty(): schema.Rule {
     return {
-      patterns: [],
+      name: "keyword.control.skip.ddlog.dl",
+      match: "\\bskip\\b",
     };
   }
 
   statement_for(): schema.Rule {
     return {
-      patterns: [],
+      begin: "\\bfor\\b",
+      end: `(?<=${Pattern.statement_end.lookbehind})`,
+      beginCaptures: {
+        0: {
+          name: "keyword.control.loop.ddlog.dl",
+        },
+      },
+      patterns: [
+        {
+          begin: "\\(",
+          end: "\\)",
+          patterns: [
+            {
+              begin: "\bif\b",
+              end: "(?=\\))",
+              patterns: [include(this.exp)],
+            },
+          ],
+        },
+        include(this.statement),
+      ],
     };
   }
 
