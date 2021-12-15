@@ -39,7 +39,6 @@
     "vsce": "^2.3.0",
     "vscode-languageclient": "^7.0.0"
   },
-  "enableProposedApi": true,
   "main": "./out/extension",
   "activationEvents": [
     "onLanguage:ddlog.dl",
