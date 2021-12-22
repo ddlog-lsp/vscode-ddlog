@@ -6,11 +6,709 @@
   ],
   "patterns": [
     {
-      "include": "#PARSE"
+      "include": "#EXTRAS"
+    },
+    {
+      "include": "#ROOT"
     }
   ],
   "repository": {
-    "PARSE": {
+    "EXTRAS": {
+      "patterns": [
+        {
+          "include": "#comment_block"
+        },
+        {
+          "include": "#comment_line"
+        }
+      ]
+    },
+    "ROOT": {
+      "patterns": [
+        {
+          "include": "#annotated_item"
+        }
+      ]
+    },
+    "annotated_item": {
+      "patterns": [
+        {
+          "include": "#item"
+        }
+      ]
+    },
+    "apply": {
+      "patterns": []
+    },
+    "arg": {
+      "patterns": []
+    },
+    "arg_opt_type": {
+      "patterns": []
+    },
+    "arg_trans": {
+      "patterns": []
+    },
+    "atom": {
+      "patterns": []
+    },
+    "atom_elem": {
+      "patterns": []
+    },
+    "atom_pos": {
+      "patterns": []
+    },
+    "atom_rec": {
+      "patterns": []
+    },
+    "attribute": {
+      "patterns": []
+    },
+    "attributes": {
+      "patterns": []
+    },
+    "comment_block": {
+      "name": "comment.block.ddlog.dl",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.ddlog.dl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.ddlog.dl"
+        }
+      }
+    },
+    "comment_line": {
+      "contentName": "comment.line.double-slash.ddlog.dl",
+      "begin": "(^[ \\t]+)?((//)(?=\\s|$))",
+      "end": "(?=$)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.ddlog.dl"
+        },
+        "2": {
+          "name": "comment.line.double-slash.ddlog.dl"
+        },
+        "3": {
+          "name": "punctuation.definition.comment.ddlog.dl"
+        }
+      }
+    },
+    "cons": {
+      "patterns": []
+    },
+    "cons_pos": {
+      "patterns": []
+    },
+    "cons_rec": {
+      "patterns": []
+    },
+    "escape_sequence": {
+      "patterns": []
+    },
+    "escape_sequence_interpolated": {
+      "patterns": []
+    },
+    "exp": {
+      "patterns": []
+    },
+    "exp_add": {
+      "patterns": []
+    },
+    "exp_assign": {
+      "patterns": []
+    },
+    "exp_binding": {
+      "patterns": []
+    },
+    "exp_bit_and": {
+      "patterns": []
+    },
+    "exp_bit_neg": {
+      "patterns": []
+    },
+    "exp_bit_or": {
+      "patterns": []
+    },
+    "exp_bit_slice": {
+      "patterns": []
+    },
+    "exp_bit_xor": {
+      "patterns": []
+    },
+    "exp_block": {
+      "patterns": []
+    },
+    "exp_break": {
+      "patterns": []
+    },
+    "exp_cast": {
+      "patterns": []
+    },
+    "exp_cat": {
+      "patterns": []
+    },
+    "exp_cond": {
+      "patterns": []
+    },
+    "exp_cons_pos": {
+      "patterns": []
+    },
+    "exp_cons_rec": {
+      "patterns": []
+    },
+    "exp_continue": {
+      "patterns": []
+    },
+    "exp_decl_var": {
+      "patterns": []
+    },
+    "exp_div": {
+      "patterns": []
+    },
+    "exp_eq": {
+      "patterns": []
+    },
+    "exp_field": {
+      "patterns": []
+    },
+    "exp_for": {
+      "patterns": []
+    },
+    "exp_fun_call": {
+      "patterns": []
+    },
+    "exp_fun_call_dot": {
+      "patterns": []
+    },
+    "exp_gt": {
+      "patterns": []
+    },
+    "exp_gteq": {
+      "patterns": []
+    },
+    "exp_lambda": {
+      "patterns": []
+    },
+    "exp_lambda_branch_0": {
+      "patterns": []
+    },
+    "exp_lambda_branch_1": {
+      "patterns": []
+    },
+    "exp_lit": {
+      "patterns": []
+    },
+    "exp_log_and": {
+      "patterns": []
+    },
+    "exp_log_imp": {
+      "patterns": []
+    },
+    "exp_log_neg": {
+      "patterns": []
+    },
+    "exp_log_or": {
+      "patterns": []
+    },
+    "exp_lt": {
+      "patterns": []
+    },
+    "exp_lteq": {
+      "patterns": []
+    },
+    "exp_match": {
+      "patterns": []
+    },
+    "exp_match_arm": {
+      "patterns": []
+    },
+    "exp_mul": {
+      "patterns": []
+    },
+    "exp_neg": {
+      "patterns": []
+    },
+    "exp_neq": {
+      "patterns": []
+    },
+    "exp_proj": {
+      "patterns": []
+    },
+    "exp_ref": {
+      "patterns": []
+    },
+    "exp_rem": {
+      "patterns": []
+    },
+    "exp_return": {
+      "patterns": []
+    },
+    "exp_seq": {
+      "patterns": []
+    },
+    "exp_shl": {
+      "patterns": []
+    },
+    "exp_shr": {
+      "patterns": []
+    },
+    "exp_slice": {
+      "patterns": []
+    },
+    "exp_sub": {
+      "patterns": []
+    },
+    "exp_try": {
+      "patterns": []
+    },
+    "exp_tuple": {
+      "patterns": []
+    },
+    "exp_type": {
+      "patterns": []
+    },
+    "exp_wild": {
+      "patterns": []
+    },
+    "field": {
+      "patterns": []
+    },
+    "function": {
+      "patterns": []
+    },
+    "function_extern": {
+      "patterns": []
+    },
+    "function_normal": {
+      "patterns": []
+    },
+    "function_normal_branch_0": {
+      "patterns": []
+    },
+    "function_normal_branch_1": {
+      "patterns": []
+    },
+    "ident": {
+      "patterns": []
+    },
+    "ident_lower": {
+      "patterns": []
+    },
+    "ident_lower_scoped": {
+      "patterns": []
+    },
+    "ident_upper": {
+      "patterns": []
+    },
+    "ident_upper_scoped": {
+      "patterns": []
+    },
+    "import": {
+      "patterns": []
+    },
+    "index": {
+      "patterns": []
+    },
+    "interpolation": {
+      "patterns": []
+    },
+    "item": {
+      "patterns": [
+        {
+          "include": "#statement_for"
+        }
+      ]
+    },
+    "key_primary": {
+      "patterns": []
+    },
+    "lit_bool": {
+      "patterns": []
+    },
+    "lit_map": {
+      "patterns": []
+    },
+    "lit_num": {
+      "patterns": []
+    },
+    "lit_num_branch_0": {
+      "patterns": []
+    },
+    "lit_num_branch_1": {
+      "patterns": []
+    },
+    "lit_num_branch_10": {
+      "patterns": []
+    },
+    "lit_num_branch_11": {
+      "patterns": []
+    },
+    "lit_num_branch_12": {
+      "patterns": []
+    },
+    "lit_num_branch_13": {
+      "patterns": []
+    },
+    "lit_num_branch_14": {
+      "patterns": []
+    },
+    "lit_num_branch_15": {
+      "patterns": []
+    },
+    "lit_num_branch_16": {
+      "patterns": []
+    },
+    "lit_num_branch_17": {
+      "patterns": []
+    },
+    "lit_num_branch_18": {
+      "patterns": []
+    },
+    "lit_num_bin": {
+      "patterns": []
+    },
+    "lit_num_dec": {
+      "patterns": []
+    },
+    "lit_num_float": {
+      "patterns": []
+    },
+    "lit_num_hex": {
+      "patterns": []
+    },
+    "lit_num_oct": {
+      "patterns": []
+    },
+    "lit_string": {
+      "patterns": []
+    },
+    "lit_vec": {
+      "patterns": []
+    },
+    "module_alias": {
+      "patterns": []
+    },
+    "module_path": {
+      "patterns": []
+    },
+    "name": {
+      "patterns": []
+    },
+    "name_arg": {
+      "patterns": []
+    },
+    "name_cons": {
+      "patterns": []
+    },
+    "name_field": {
+      "patterns": []
+    },
+    "name_func": {
+      "patterns": []
+    },
+    "name_index": {
+      "patterns": []
+    },
+    "name_rel": {
+      "patterns": []
+    },
+    "name_trans": {
+      "patterns": []
+    },
+    "name_type": {
+      "patterns": []
+    },
+    "name_var_term": {
+      "patterns": []
+    },
+    "name_var_type": {
+      "patterns": []
+    },
+    "pat": {
+      "patterns": []
+    },
+    "pat_cons": {
+      "patterns": []
+    },
+    "pat_cons_pos": {
+      "patterns": []
+    },
+    "pat_cons_rec": {
+      "patterns": []
+    },
+    "pat_lit": {
+      "patterns": []
+    },
+    "pat_term_decl_var": {
+      "patterns": []
+    },
+    "pat_tuple": {
+      "patterns": []
+    },
+    "pat_type": {
+      "patterns": []
+    },
+    "pat_wild": {
+      "patterns": []
+    },
+    "rel": {
+      "patterns": []
+    },
+    "rel_args": {
+      "patterns": []
+    },
+    "rel_elem": {
+      "patterns": []
+    },
+    "rel_role": {
+      "patterns": []
+    },
+    "rel_semantics": {
+      "patterns": []
+    },
+    "rhs": {
+      "patterns": []
+    },
+    "rhs_atom_neg": {
+      "patterns": []
+    },
+    "rhs_flat_map": {
+      "patterns": []
+    },
+    "rhs_grouping": {
+      "patterns": []
+    },
+    "rhs_inspect": {
+      "patterns": []
+    },
+    "rule": {
+      "patterns": []
+    },
+    "rule_end": {
+      "patterns": []
+    },
+    "statement": {
+      "patterns": [
+        {
+          "include": "#statement_assign"
+        },
+        {
+          "include": "#statement_block"
+        },
+        {
+          "include": "#statement_empty"
+        },
+        {
+          "include": "#statement_for"
+        },
+        {
+          "include": "#statement_if"
+        },
+        {
+          "include": "#statement_insert"
+        },
+        {
+          "include": "#statement_match"
+        }
+      ]
+    },
+    "statement_assign": {
+      "patterns": []
+    },
+    "statement_block": {
+      "begin": "{",
+      "end": "}",
+      "patterns": [
+        {
+          "name": "punctuation.terminator.statement.ddlog.dl",
+          "match": ";"
+        },
+        {
+          "include": "#statement"
+        }
+      ]
+    },
+    "statement_empty": {
+      "name": "keyword.control.skip.ddlog.dl",
+      "match": "\\bskip\\b"
+    },
+    "statement_for": {
+      "begin": "\\bfor\\b",
+      "end": "(?<=skip|\\})",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.control.loop.ddlog.dl"
+        }
+      },
+      "patterns": [
+        {
+          "begin": "\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "begin": "\bif\b",
+              "end": "(?=\\))",
+              "patterns": [
+                {
+                  "include": "#atom"
+                },
+                {
+                  "include": "#exp"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "include": "#statement"
+        }
+      ]
+    },
+    "statement_if": {
+      "begin": "\\bif\\b",
+      "end": "(?<=skip|\\})",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.control.conditional.ddlog.dl"
+        }
+      },
+      "patterns": [
+        {
+          "begin": "\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#exp"
+            }
+          ]
+        },
+        {
+          "begin": "\\belse\\b",
+          "end": "(?<=skip|\\})",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.control.conditional.ddlog.dl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#statement"
+            }
+          ]
+        },
+        {
+          "include": "#statement"
+        }
+      ]
+    },
+    "statement_insert": {
+      "patterns": []
+    },
+    "statement_match": {
+      "patterns": []
+    },
+    "statement_match_arm": {
+      "patterns": []
+    },
+    "string_quoted": {
+      "patterns": []
+    },
+    "string_quoted_branch_0": {
+      "patterns": []
+    },
+    "string_quoted_branch_1": {
+      "patterns": []
+    },
+    "string_quoted_escaped_branch_0": {
+      "patterns": []
+    },
+    "string_quoted_escaped_branch_1": {
+      "patterns": []
+    },
+    "string_raw_interpolated": {
+      "patterns": []
+    },
+    "string_raw_interpolated_branch_0": {
+      "patterns": []
+    },
+    "string_raw_interpolated_branch_1": {
+      "patterns": []
+    },
+    "transformer": {
+      "patterns": []
+    },
+    "type": {
+      "patterns": []
+    },
+    "type_atom": {
+      "patterns": []
+    },
+    "type_bigint": {
+      "patterns": []
+    },
+    "type_bit": {
+      "patterns": []
+    },
+    "type_bool": {
+      "patterns": []
+    },
+    "type_double": {
+      "patterns": []
+    },
+    "type_float": {
+      "patterns": []
+    },
+    "type_fun": {
+      "patterns": []
+    },
+    "type_fun_branch_0": {
+      "patterns": []
+    },
+    "type_fun_branch_1": {
+      "patterns": []
+    },
+    "type_signed": {
+      "patterns": []
+    },
+    "type_string": {
+      "patterns": []
+    },
+    "type_trans": {
+      "patterns": []
+    },
+    "type_trans_fun": {
+      "patterns": []
+    },
+    "type_trans_rel": {
+      "patterns": []
+    },
+    "type_tuple": {
+      "patterns": []
+    },
+    "type_union": {
+      "patterns": []
+    },
+    "type_user": {
+      "patterns": []
+    },
+    "type_var": {
+      "patterns": []
+    },
+    "typedef": {
+      "patterns": []
+    },
+    "typedef_extern": {
+      "patterns": []
+    },
+    "typedef_normal": {
+      "patterns": []
+    },
+    "word": {
       "patterns": []
     }
   }

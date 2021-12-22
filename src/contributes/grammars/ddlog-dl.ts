@@ -5,7 +5,10 @@ import * as schema from "./schema";
 
 const { include } = basis;
 
-const Pattern = {
+const Rx = {
+  pat: {
+    lookahead: "",
+  },
   statement_end: {
     lookbehind: "skip|\\}",
   },
@@ -1162,7 +1165,7 @@ export class DDlogDl implements basis.Render {
   statement_for(): schema.Rule {
     return {
       begin: "\\bfor\\b",
-      end: `(?<=${Pattern.statement_end.lookbehind})`,
+      end: `(?<=${Rx.statement_end.lookbehind})`,
       beginCaptures: {
         0: {
           name: "keyword.control.loop.ddlog.dl",
@@ -1188,7 +1191,7 @@ export class DDlogDl implements basis.Render {
   statement_if(): schema.Rule {
     return {
       begin: "\\bif\\b",
-      end: `(?<=${Pattern.statement_end.lookbehind})`,
+      end: `(?<=${Rx.statement_end.lookbehind})`,
       beginCaptures: {
         0: {
           name: "keyword.control.conditional.ddlog.dl",
@@ -1202,7 +1205,7 @@ export class DDlogDl implements basis.Render {
         },
         {
           begin: "\\belse\\b",
-          end: `(?<=${Pattern.statement_end.lookbehind})`,
+          end: `(?<=${Rx.statement_end.lookbehind})`,
           beginCaptures: {
             0: {
               name: "keyword.control.conditional.ddlog.dl",
@@ -1217,19 +1220,51 @@ export class DDlogDl implements basis.Render {
 
   statement_insert(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [include(this.atom)],
     };
   }
 
   statement_match(): schema.Rule {
     return {
-      patterns: [],
+      begin: "\\bmatch\\b",
+      end: `(?<=})`,
+      beginCaptures: {
+        0: {
+          name: "keyword.control.match.ddlog.dl",
+        },
+      },
+      patterns: [
+        {
+          begin: "\\(",
+          end: "\\)",
+          patterns: [include(this.exp)],
+        },
+        {
+          begin: "{",
+          end: "}",
+          patterns: [
+            {
+              name: "punctuation.terminator.match-arm.ddlog.dl",
+              match: ",",
+            },
+          ],
+        },
+      ],
     };
   }
 
   statement_match_arm(): schema.Rule {
     return {
-      patterns: [],
+      begin: `(?=${Rx.pat.lookahead})`,
+      end: `(?<=${Rx.statement_end.lookbehind})`,
+      patterns: [
+        include(this.pat),
+        {
+          match: "->",
+          name: "punctuation.separator.match-arm.ddlog.dl",
+        },
+        include(this.statement),
+      ],
     };
   }
 
