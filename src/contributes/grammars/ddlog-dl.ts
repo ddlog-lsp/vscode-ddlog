@@ -7,7 +7,13 @@ const { include } = basis;
 
 const Rx = {
   pat: {
-    lookahead: "",
+    // pat_cons: ([a-zA-Z_][a-zA-Z0-9_]*::)*[A-Z][a-zA-Z0-9_]*
+    // pat_term_decl_var: var\b|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-z_][a-zA-Z0-9_]*
+    // pat_lit: false\\b|true\\b|[0-9]\\b|"
+    // pat_tuple: \\(
+    // pat_type: <recursive>
+    // pat_wild: _\\b
+    lookahead: `_\\b|false\\b|true\\b|[0-9]\\b|"|\\(|var\\b|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*`,
   },
   statement_end: {
     lookbehind: "skip|\\}",
