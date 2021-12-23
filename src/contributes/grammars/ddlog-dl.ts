@@ -13,19 +13,20 @@ const Rx = {
     // pat_tuple: \\(
     // pat_type: <recursive>
     // pat_wild: _\\b
-    lookahead: `_\\b|false\\b|true\\b|[0-9]\\b|"|\\(|var\\b|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*`,
+    lookahead: `(_|false|true|var|[0-9])\\b|"|\\(|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*`,
   },
   item: {
     // statement_for: for\\b
     // apply: apply\\b
     // import: import\\b
-    // function: export\\b|function\\b
+    // function: extern\\b|function\\b
     // index: index\\b
     // rel: input\\b|internal\\b|output\\b|&|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*
     // rule: <combined with rel>
     // transformer: <combined with function>
     // typedef: typedef\\b
-    lookahead: "",
+    lookahead:
+      "(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*",
   },
   statement_end: {
     lookbehind: "skip|\\}",
@@ -118,9 +119,8 @@ export class DDlogDl implements basis.Render {
         exp_tuple: this.exp_tuple(),
         exp_type: this.exp_type(),
         exp_wild: this.exp_wild(),
+        extern_function_transformer_typedef: this.extern_function_transformer_typedef(),
         field: this.field(),
-        function: this.function(),
-        function_extern: this.function_extern(),
         function_normal: this.function_normal(),
         function_normal_branch_0: this.function_normal_branch_0(),
         function_normal_branch_1: this.function_normal_branch_1(),
@@ -226,8 +226,6 @@ export class DDlogDl implements basis.Render {
         type_union: this.type_union(),
         type_user: this.type_user(),
         type_var: this.type_var(),
-        typedef: this.typedef(),
-        typedef_extern: this.typedef_extern(),
         typedef_normal: this.typedef_normal(),
         word: this.word(),
       },
@@ -254,6 +252,13 @@ export class DDlogDl implements basis.Render {
 
   apply(): schema.Rule {
     return {
+      begin: "\\bapply\\b",
+      end: `(?=${Rx.item.lookahead})`,
+      beginCaptures: {
+        0: {
+          name: "storage.type.apply.ddlog.dl",
+        },
+      },
       patterns: [],
     };
   }
@@ -703,19 +708,21 @@ export class DDlogDl implements basis.Render {
     };
   }
 
+  // NOTE: must be combined with `transformer` and `typedef_extern`
+  extern_function_transformer_typedef(): schema.Rule {
+    return {
+      begin: "\\bextern\\b",
+      end: `(?=${Rx.item.lookahead})`,
+      beginCaptures: {
+        0: {
+          name: "variable.other.readwrite.ddlog.dl",
+        },
+      },
+      patterns: [include(this.function_normal), include(this.transformer), include(this.typedef_normal)],
+    };
+  }
+
   field(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  function(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  function_extern(): schema.Rule {
     return {
       patterns: [],
     };
@@ -723,6 +730,13 @@ export class DDlogDl implements basis.Render {
 
   function_normal(): schema.Rule {
     return {
+      begin: "\\bfunction\\b",
+      end: `(?=${Rx.item.lookahead})`,
+      beginCaptures: {
+        0: {
+          name: "storage.type.function.ddlog.dl",
+        },
+      },
       patterns: [],
     };
   }
@@ -777,6 +791,13 @@ export class DDlogDl implements basis.Render {
 
   index(): schema.Rule {
     return {
+      begin: "\\bindex\\b",
+      end: `(?=${Rx.item.lookahead})`,
+      beginCaptures: {
+        0: {
+          name: "storage.type.index.ddlog.dl",
+        },
+      },
       patterns: [],
     };
   }
@@ -790,15 +811,15 @@ export class DDlogDl implements basis.Render {
   item(): schema.Rule {
     return {
       patterns: [
+        include(this.extern_function_transformer_typedef),
         include(this.statement_for),
-        // include(this.apply),
-        // include(this.import),
-        // include(this.function),
-        // include(this.index),
+        include(this.apply),
+        include(this.import),
+        include(this.function_normal),
+        include(this.index),
         // include(this.rel),
         // include(this.rule),
-        // include(this.transformer),
-        // include(this.typedef),
+        include(this.typedef_normal),
       ],
     };
   }
@@ -1336,6 +1357,13 @@ export class DDlogDl implements basis.Render {
 
   transformer(): schema.Rule {
     return {
+      begin: "\\btransformer\\b",
+      end: `(?=${Rx.item.lookahead})`,
+      beginCaptures: {
+        0: {
+          name: "storage.type.transformer.ddlog.dl",
+        },
+      },
       patterns: [],
     };
   }
@@ -1454,20 +1482,15 @@ export class DDlogDl implements basis.Render {
     };
   }
 
-  typedef(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  typedef_extern(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
   typedef_normal(): schema.Rule {
     return {
+      begin: "\\btypedef\\b",
+      end: `(?=${Rx.item.lookahead})`,
+      beginCaptures: {
+        0: {
+          name: "storage.type.typedef.ddlog.dl",
+        },
+      },
       patterns: [],
     };
   }
