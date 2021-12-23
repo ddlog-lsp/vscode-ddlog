@@ -15,6 +15,18 @@ const Rx = {
     // pat_wild: _\\b
     lookahead: `_\\b|false\\b|true\\b|[0-9]\\b|"|\\(|var\\b|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*`,
   },
+  item: {
+    // statement_for: for\\b
+    // apply: apply\\b
+    // import: import\\b
+    // function: export\\b|function\\b
+    // index: index\\b
+    // rel: input\\b|internal\\b|output\\b|&|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*
+    // rule: <combined with rel>
+    // transformer: <combined with function>
+    // typedef: typedef\\b
+    lookahead: "",
+  },
   statement_end: {
     lookbehind: "skip|\\}",
   },
