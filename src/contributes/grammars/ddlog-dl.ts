@@ -178,8 +178,6 @@ export class DDlogDl implements basis.Render {
         pat_type: this.pat_type(),
         pat_wild: this.pat_wild(),
         rel: this.rel(),
-        rel_args: this.rel_args(),
-        rel_elem: this.rel_elem(),
         rel_role: this.rel_role(),
         rel_semantics: this.rel_semantics(),
         rhs: this.rhs(),
@@ -817,7 +815,7 @@ export class DDlogDl implements basis.Render {
         include(this.import),
         include(this.function_normal),
         include(this.index),
-        // include(this.rel),
+        include(this.rel),
         // include(this.rule),
         include(this.typedef_normal),
       ],
@@ -1090,31 +1088,45 @@ export class DDlogDl implements basis.Render {
 
   rel(): schema.Rule {
     return {
-      patterns: [],
-    };
-  }
-
-  rel_args(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  rel_elem(): schema.Rule {
-    return {
-      patterns: [],
+      patterns: [include(this.rel_role), include(this.rel_semantics)],
     };
   }
 
   rel_role(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [
+        {
+          match: "\\binput\\b",
+          name: "storage.type.relation.role.ddlog.dl",
+        },
+        {
+          match: "\\binternal\\b",
+          name: "storage.type.relation.role.ddlog.dl",
+        },
+        {
+          match: "\\boutput\\b",
+          name: "storage.type.relation.role.ddlog.dl",
+        },
+      ],
     };
   }
 
   rel_semantics(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [
+        {
+          match: "\\binput\\b",
+          name: "storage.type.relation.semantics.ddlog.dl",
+        },
+        {
+          match: "\\binternal\\b",
+          name: "storage.type.relation.semantics.ddlog.dl",
+        },
+        {
+          match: "\\boutput\\b",
+          name: "storage.type.relation.semantics.ddlog.dl",
+        },
+      ],
     };
   }
 
