@@ -124,11 +124,6 @@ export class DDlogDl implements basis.Render {
         function_normal: this.function_normal(),
         function_normal_branch_0: this.function_normal_branch_0(),
         function_normal_branch_1: this.function_normal_branch_1(),
-        ident: this.ident(),
-        ident_lower: this.ident_lower(),
-        ident_lower_scoped: this.ident_lower_scoped(),
-        ident_upper: this.ident_upper(),
-        ident_upper_scoped: this.ident_upper_scoped(),
         import: this.import(),
         index: this.index(),
         interpolation: this.interpolation(),
@@ -746,36 +741,6 @@ export class DDlogDl implements basis.Render {
   }
 
   function_normal_branch_1(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  ident(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  ident_lower(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  ident_lower_scoped(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  ident_upper(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  ident_upper_scoped(): schema.Rule {
     return {
       patterns: [],
     };
