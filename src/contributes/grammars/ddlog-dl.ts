@@ -1084,15 +1084,15 @@ export class DDlogDl implements basis.Render {
       patterns: [
         {
           match: "\\binput\\b",
-          name: "storage.type.relation.role.ddlog.dl",
+          name: "storage.modifier.relation.role.ddlog.dl",
         },
         {
           match: "\\binternal\\b",
-          name: "storage.type.relation.role.ddlog.dl",
+          name: "storage.modifier.relation.role.ddlog.dl",
         },
         {
           match: "\\boutput\\b",
-          name: "storage.type.relation.role.ddlog.dl",
+          name: "storage.modifier.relation.role.ddlog.dl",
         },
       ],
     };
