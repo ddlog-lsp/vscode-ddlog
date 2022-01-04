@@ -7,13 +7,13 @@ const { include } = basis;
 
 const Rx = {
   pat: {
-    // pat_cons: ([a-zA-Z_][a-zA-Z0-9_]*::)*[A-Z][a-zA-Z0-9_]*
-    // pat_term_decl_var: var\b|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-z_][a-zA-Z0-9_]*
+    // pat_cons: \\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[A-Z][a-zA-Z0-9_]*\\b
+    // pat_term_decl_var: var\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-z_][a-zA-Z0-9_]*\\b
     // pat_lit: false\\b|true\\b|[0-9]\\b|"
     // pat_tuple: \\(
     // pat_type: <recursive>
     // pat_wild: _\\b
-    lookahead: `(_|false|true|var|[0-9])\\b|"|\\(|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*`,
+    lookahead: `(_|false|true|var|[0-9])\\b|"|\\(|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b`,
   },
   item: {
     // statement_for: for\\b
@@ -21,12 +21,12 @@ const Rx = {
     // import: import\\b
     // function: extern\\b|function\\b
     // index: index\\b
-    // rel: input\\b|internal\\b|output\\b|&|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*
+    // rel: input\\b|internal\\b|output\\b|&|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b
     // rule: <combined with rel>
     // transformer: <combined with function>
     // typedef: typedef\\b
     lookahead:
-      "(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|([a-zA-Z_][a-zA-Z0-9_]*::)*[a-zA-Z_][a-zA-Z0-9_]*",
+      "(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b",
   },
   statement_end: {
     lookbehind: "skip|\\}",
