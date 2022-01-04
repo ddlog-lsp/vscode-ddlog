@@ -980,7 +980,8 @@ export class DDlogDl implements basis.Render {
 
   name_rel(): schema.Rule {
     return {
-      patterns: [],
+      match: Rx.ident_upper_scoped,
+      name: "support.class.relation.ddlog.dl support.type.relation.ddlg.dl entity.name.class.ddlog.dl entity.name.type.ddlog.dl storage.type.relation.ddlog.dl",
     };
   }
 
@@ -1064,7 +1065,14 @@ export class DDlogDl implements basis.Render {
 
   rel(): schema.Rule {
     return {
-      patterns: [include(this.rel_role), include(this.rel_semantics)],
+      patterns: [
+        include(this.rel_role),
+        include(this.rel_semantics),
+        {
+          match: "&",
+        },
+        include(this.name_rel),
+      ],
     };
   }
 
