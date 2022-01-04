@@ -758,7 +758,20 @@ export class DDlogDl implements basis.Render {
 
   import(): schema.Rule {
     return {
-      patterns: [],
+      begin: "\\bimport\\b",
+      end: `(?=${Rx.item.lookahead})`,
+      beginCaptures: {
+        0: {
+          name: "keyword.control.import.ddlog.dl",
+        },
+      },
+      patterns: [
+        {
+          match: "\\s*\\bas\\b",
+          name: "keyword.control.import.as.ddlog.dl",
+        },
+        include(this.module_path),
+      ],
     };
   }
 
@@ -931,7 +944,8 @@ export class DDlogDl implements basis.Render {
 
   module_path(): schema.Rule {
     return {
-      patterns: [],
+      match: `\\s*${Rx.ident_scoped}`,
+      name: "variable.other.readwrite.alias.ddlog.dl",
     };
   }
 
