@@ -1102,15 +1102,15 @@ export class DDlogDl implements basis.Render {
     return {
       patterns: [
         {
-          match: "\\binput\\b",
+          match: "\\brelation\\b",
           name: "storage.type.relation.semantics.ddlog.dl",
         },
         {
-          match: "\\binternal\\b",
+          match: "\\bstream\\b",
           name: "storage.type.relation.semantics.ddlog.dl",
         },
         {
-          match: "\\boutput\\b",
+          match: "\\bmultiset\\b",
           name: "storage.type.relation.semantics.ddlog.dl",
         },
       ],
