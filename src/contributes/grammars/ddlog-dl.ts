@@ -15,6 +15,12 @@ const Rx = {
     // pat_wild: _\\b
     lookahead: `(_|false|true|var|[0-9])\\b|"|\\(|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b`,
   },
+  ident: "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+  ident_lower: "\\b[a-z_][a-zA-Z0-9_]*\\b",
+  ident_lower_scoped: "\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-z_][a-zA-Z0-9_]*\\b",
+  ident_scoped: "\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b",
+  ident_upper: "\\b[A-Z][a-zA-Z0-9_]*\\b",
+  ident_upper_scoped: "\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[A-Z][a-zA-Z0-9_]*\\b",
   item: {
     // statement_for: for\\b
     // apply: apply\\b
@@ -28,6 +34,11 @@ const Rx = {
     lookahead:
       "(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b",
   },
+  lit_num_bin: "[0-1][0-1_]*",
+  lit_num_dec: "[0-9][0-9_]*",
+  lit_num_float: "[0-9][0-9_]*(\\.[0-9][0-9_]*)?([eE][+-]?[0-9][0-9_]*)?",
+  lit_num_hex: "[0-9a-fA-F][0-9a-fA-F_]*",
+  lit_num_oct: "[0-7][0-7_]*",
   statement_end: {
     lookbehind: "skip|\\}",
   },
