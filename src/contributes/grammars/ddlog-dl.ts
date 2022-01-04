@@ -741,7 +741,7 @@ export class DDlogDl implements basis.Render {
           name: "storage.type.function.ddlog.dl",
         },
       },
-      patterns: [],
+      patterns: [include(this.name_func)],
     };
   }
 
@@ -968,7 +968,10 @@ export class DDlogDl implements basis.Render {
 
   name_func(): schema.Rule {
     return {
-      patterns: [],
+      match: `\\s*(${Rx.ident_lower_scoped})`,
+      captures: {
+        1: { name: "entity.name.function.ddlog.dl support.function.ddlog.dl" },
+      },
     };
   }
 
