@@ -161,7 +161,6 @@ export class DDlogDl implements basis.Render {
         lit_num_oct: this.lit_num_oct(),
         lit_string: this.lit_string(),
         lit_vec: this.lit_vec(),
-        module_alias: this.module_alias(),
         module_path: this.module_path(),
         name: this.name(),
         name_arg: this.name_arg(),
@@ -925,12 +924,6 @@ export class DDlogDl implements basis.Render {
   }
 
   lit_vec(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  module_alias(): schema.Rule {
     return {
       patterns: [],
     };
