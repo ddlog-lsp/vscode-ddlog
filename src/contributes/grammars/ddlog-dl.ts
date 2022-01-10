@@ -54,7 +54,7 @@ export class DDlogDl implements basis.Render {
       name: "DDlog Program",
       scopeName: "source.ddlog.dl",
       fileTypes: [".dl"],
-      patterns: [include(this.EXTRAS), include(this.ROOT)],
+      patterns: [include(this.comment), include(this.EXTRAS), include(this.ROOT)],
       repository: {
         EXTRAS: this.EXTRAS(),
         ROOT: this.ROOT(),
@@ -69,6 +69,7 @@ export class DDlogDl implements basis.Render {
         atom_rec: this.atom_rec(),
         attribute: this.attribute(),
         attributes: this.attributes(),
+        comment: this.comment_block(),
         comment_block: this.comment_block(),
         comment_line: this.comment_line(),
         cons: this.cons(),
@@ -317,6 +318,12 @@ export class DDlogDl implements basis.Render {
   attributes(): schema.Rule {
     return {
       patterns: [],
+    };
+  }
+
+  comment(): schema.Rule {
+    return {
+      patterns: [include(this.comment_block), include(this.comment_line)],
     };
   }
 
@@ -766,6 +773,7 @@ export class DDlogDl implements basis.Render {
         },
       },
       patterns: [
+        include(this.comment),
         {
           match: "\\s*\\bas\\b",
           name: "keyword.control.import.as.ddlog.dl",
