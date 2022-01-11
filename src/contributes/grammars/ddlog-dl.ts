@@ -570,7 +570,13 @@ export class DDlogDl implements basis.Render {
 
   exp_lit(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [
+        include(this.lit_bool),
+        include(this.lit_num),
+        include(this.lit_map),
+        include(this.lit_string),
+        include(this.lit_vec),
+      ],
     };
   }
 
