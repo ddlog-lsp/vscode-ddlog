@@ -231,7 +231,6 @@ export class DDlogDl implements basis.Render {
         type_user: this.type_user(),
         type_var: this.type_var(),
         typedef_normal: this.typedef_normal(),
-        word: this.word(),
       },
     };
   }
@@ -1567,12 +1566,6 @@ export class DDlogDl implements basis.Render {
           name: "storage.type.typedef.ddlog.dl",
         },
       },
-      patterns: [],
-    };
-  }
-
-  word(): schema.Rule {
-    return {
       patterns: [],
     };
   }
