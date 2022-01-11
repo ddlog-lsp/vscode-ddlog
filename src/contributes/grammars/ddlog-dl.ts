@@ -1417,7 +1417,20 @@ export class DDlogDl implements basis.Render {
 
   type(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [
+        include(this.type_bit),
+        include(this.type_signed),
+        include(this.type_bigint),
+        include(this.type_double),
+        include(this.type_float),
+        include(this.type_string),
+        include(this.type_bool),
+        include(this.type_union),
+        include(this.type_user),
+        include(this.type_var),
+        include(this.type_fun),
+        include(this.type_tuple),
+      ],
     };
   }
 
