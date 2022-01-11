@@ -1454,7 +1454,8 @@ export class DDlogDl implements basis.Render {
 
   type_bigint(): schema.Rule {
     return {
-      patterns: [],
+      match: "\\bbigint\\b",
+      name: "support.type.primitive.ddlog.dl",
     };
   }
 
@@ -1466,19 +1467,22 @@ export class DDlogDl implements basis.Render {
 
   type_bool(): schema.Rule {
     return {
-      patterns: [],
+      match: "\\bbool\\b",
+      name: "support.type.primitive.ddlog.dl",
     };
   }
 
   type_double(): schema.Rule {
     return {
-      patterns: [],
+      match: "\\bdouble\\b",
+      name: "support.type.primitive.ddlog.dl",
     };
   }
 
   type_float(): schema.Rule {
     return {
-      patterns: [],
+      match: "\\bfloat\\b",
+      name: "support.type.primitive.ddlog.dl",
     };
   }
 
@@ -1508,7 +1512,8 @@ export class DDlogDl implements basis.Render {
 
   type_string(): schema.Rule {
     return {
-      patterns: [],
+      match: "\\bstring\\b",
+      name: "support.type.primitive.ddlog.dl",
     };
   }
 
@@ -1563,7 +1568,29 @@ export class DDlogDl implements basis.Render {
           name: "storage.type.typedef.ddlog.dl",
         },
       },
-      patterns: [],
+      name: "meta.typedef.ddlog.dl",
+      patterns: [
+        {
+          begin: `\\s*${Rx.ident_scoped}`,
+          end: `(?=${Rx.item.lookahead})`,
+          beginCaptures: {
+            0: {
+              name: "support.class.relation.ddlog.dl support.type.relation.ddlg.dl entity.name.class.ddlog.dl entity.name.type.ddlog.dl storage.type.relation.ddlog.dl",
+            },
+          },
+          patterns: [
+            {
+              begin: "<",
+              end: ">",
+            },
+            {
+              match: "=",
+              end: "",
+            },
+            include(this.type),
+          ],
+        },
+      ],
     };
   }
 }
