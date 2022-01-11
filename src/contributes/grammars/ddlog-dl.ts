@@ -64,9 +64,6 @@ export class DDlogDl implements basis.Render {
         arg_opt_type: this.arg_opt_type(),
         arg_trans: this.arg_trans(),
         atom: this.atom(),
-        atom_elem: this.atom_elem(),
-        atom_pos: this.atom_pos(),
-        atom_rec: this.atom_rec(),
         attribute: this.attribute(),
         attributes: this.attributes(),
         comment: this.comment_block(),
@@ -285,24 +282,6 @@ export class DDlogDl implements basis.Render {
   }
 
   atom(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  atom_elem(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  atom_pos(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  atom_rec(): schema.Rule {
     return {
       patterns: [],
     };
