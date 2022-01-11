@@ -1198,6 +1198,7 @@ export class DDlogDl implements basis.Render {
     return {
       begin: "{",
       end: "}",
+      name: "meta.statement.block.ddlog.dl",
       patterns: [
         {
           name: "punctuation.terminator.statement.ddlog.dl",
@@ -1224,6 +1225,7 @@ export class DDlogDl implements basis.Render {
           name: "keyword.control.loop.ddlog.dl",
         },
       },
+      name: "meta.statement.for.ddlog.dl",
       patterns: [
         {
           begin: "\\(",
@@ -1250,6 +1252,7 @@ export class DDlogDl implements basis.Render {
           name: "keyword.control.conditional.ddlog.dl",
         },
       },
+      name: "meta.statement.if.ddlog.dl",
       patterns: [
         {
           begin: "\\(",
@@ -1286,6 +1289,7 @@ export class DDlogDl implements basis.Render {
           name: "keyword.control.match.ddlog.dl",
         },
       },
+      name: "meta.statement.match.ddlog.dl",
       patterns: [
         {
           begin: "\\(",
