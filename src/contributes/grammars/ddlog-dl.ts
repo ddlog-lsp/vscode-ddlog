@@ -1051,7 +1051,14 @@ export class DDlogDl implements basis.Render {
 
   pat(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [
+        include(this.pat_cons),
+        include(this.pat_term_decl_var),
+        include(this.pat_lit),
+        include(this.pat_tuple),
+        include(this.pat_type),
+        include(this.pat_wild),
+      ],
     };
   }
 
