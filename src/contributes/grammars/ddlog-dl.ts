@@ -70,8 +70,6 @@ export class DDlogDl implements basis.Render {
         comment_block: this.comment_block(),
         comment_line: this.comment_line(),
         cons: this.cons(),
-        cons_pos: this.cons_pos(),
-        cons_rec: this.cons_rec(),
         escape_sequence: this.escape_sequence(),
         escape_sequence_interpolated: this.escape_sequence_interpolated(),
         exp: this.exp(),
@@ -343,18 +341,6 @@ export class DDlogDl implements basis.Render {
   }
 
   cons(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  cons_pos(): schema.Rule {
-    return {
-      patterns: [],
-    };
-  }
-
-  cons_rec(): schema.Rule {
     return {
       patterns: [],
     };
