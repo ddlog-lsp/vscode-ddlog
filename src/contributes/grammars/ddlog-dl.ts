@@ -883,7 +883,8 @@ export class DDlogDl implements basis.Render {
 
   lit_bool(): schema.Rule {
     return {
-      patterns: [],
+      match: "\\b(false|true)\\b",
+      name: "constant.language.boolean.ddlog.ts",
     };
   }
 
