@@ -1082,7 +1082,7 @@ export class DDlogDl implements basis.Render {
 
   pat_lit(): schema.Rule {
     return {
-      patterns: [],
+      patterns: [include(this.lit_bool), include(this.lit_num), include(this.lit_string)],
     };
   }
 
