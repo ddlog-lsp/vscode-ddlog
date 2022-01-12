@@ -1465,7 +1465,21 @@ export class DDlogDl implements basis.Render {
 
   type_bit(): schema.Rule {
     return {
-      patterns: [],
+      begin: "\\bbit\\b",
+      end: "(?<=>)",
+      beginCaptures: {
+        0: {
+          name: "support.type.primitive.ddlog.dl",
+        },
+      },
+      name: "meta.type.bit.ddlog.dl",
+      patterns: [
+        {
+          begin: "<",
+          end: ">",
+          patterns: [include(this.lit_num_dec)],
+        },
+      ],
     };
   }
 
