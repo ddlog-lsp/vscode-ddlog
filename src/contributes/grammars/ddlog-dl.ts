@@ -974,8 +974,12 @@ export class DDlogDl implements basis.Render {
 
   module_path(): schema.Rule {
     return {
-      match: `\\s*${Rx.ident_scoped}`,
-      name: "variable.other.readwrite.alias.ddlog.dl",
+      match: `\\s*(${Rx.ident_scoped})`,
+      captures: {
+        1: {
+          name: "variable.other.readwrite.alias.ddlog.dl",
+        },
+      },
     };
   }
 
@@ -1571,10 +1575,10 @@ export class DDlogDl implements basis.Render {
       name: "meta.typedef.ddlog.dl",
       patterns: [
         {
-          begin: `\\s*${Rx.ident_scoped}`,
+          begin: `\\s*(${Rx.ident_scoped})`,
           end: `(?=${Rx.item.lookahead})`,
           beginCaptures: {
-            0: {
+            1: {
               name: "support.class.relation.ddlog.dl support.type.relation.ddlg.dl entity.name.class.ddlog.dl entity.name.type.ddlog.dl storage.type.relation.ddlog.dl",
             },
           },
