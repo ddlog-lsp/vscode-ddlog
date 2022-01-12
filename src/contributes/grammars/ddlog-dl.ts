@@ -1581,7 +1581,26 @@ export class DDlogDl implements basis.Render {
 
   type_user(): schema.Rule {
     return {
-      patterns: [],
+      begin: `\\s*(?!.*(:-|,|\\.)\\s*$)(${Rx.ident_scoped})`,
+      end: "(?<=[>}])|(?=\\|)",
+      beginCaptures: {
+        0: {
+          name: "support.type.primitive.ddlog.dl",
+        },
+      },
+      name: "meta.type.user.ddlog.dl",
+      patterns: [
+        {
+          begin: "<",
+          end: ">",
+          patterns: [
+            {
+              match: ",",
+            },
+            include(this.type),
+          ],
+        },
+      ],
     };
   }
 
