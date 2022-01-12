@@ -1524,7 +1524,21 @@ export class DDlogDl implements basis.Render {
 
   type_signed(): schema.Rule {
     return {
-      patterns: [],
+      begin: "\\bsigned\\b",
+      end: "(?<=>)",
+      beginCaptures: {
+        0: {
+          name: "support.type.primitive.ddlog.dl",
+        },
+      },
+      name: "meta.type.signed.ddlog.dl",
+      patterns: [
+        {
+          begin: "<",
+          end: ">",
+          patterns: [include(this.lit_num_dec)],
+        },
+      ],
     };
   }
 
