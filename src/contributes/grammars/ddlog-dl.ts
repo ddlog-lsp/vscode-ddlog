@@ -1559,7 +1559,8 @@ export class DDlogDl implements basis.Render {
 
   type_var(): schema.Rule {
     return {
-      patterns: [],
+      match: `'${Rx.ident_upper}`,
+      name: "storage.type.generic.ddlog.dl",
     };
   }
 
