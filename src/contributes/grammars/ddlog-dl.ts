@@ -1593,10 +1593,11 @@ export class DDlogDl implements basis.Render {
     };
   }
 
+  // NOTE: this is merged with `cons`
   type_user(): schema.Rule {
     return {
       begin: `\\s*(?!.*(:-|,|\\.)\\s*$)(${Rx.ident_scoped})`,
-      end: "(?<=[>}])|(?=\\|)",
+      end: `(?<=[>}])|(?=[|]|${Rx.item.lookahead})`,
       beginCaptures: {
         0: {
           name: "support.type.primitive.ddlog.dl",
@@ -1612,6 +1613,17 @@ export class DDlogDl implements basis.Render {
               match: ",",
             },
             include(this.type),
+          ],
+        },
+        {
+          begin: "{",
+          end: "}",
+          patterns: [
+            {
+              begin: "(?<=[,{])",
+              end: ",|(?=})",
+              patterns: [include(this.field)],
+            },
           ],
         },
       ],
