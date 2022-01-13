@@ -39,6 +39,7 @@ const Rx = {
   lit_num_float: "[0-9][0-9_]*(\\.[0-9][0-9_]*)?([eE][+-]?[0-9][0-9_]*)?",
   lit_num_hex: "[0-9a-fA-F][0-9a-fA-F_]*",
   lit_num_oct: "[0-7][0-7_]*",
+  name_var_type: "'[A-Z][a-zA-Z0-9_]*",
   statement_end: {
     lookbehind: "skip|\\}",
   },
@@ -1049,7 +1050,8 @@ export class DDlogDl implements basis.Render {
 
   name_var_type(): schema.Rule {
     return {
-      patterns: [],
+      match: Rx.name_var_type,
+      name: "storage.type.generic.ddlog.dl meta.name_var_type",
     };
   }
 
