@@ -756,7 +756,19 @@ export class DDlogDl implements basis.Render {
 
   field(): schema.Rule {
     return {
-      patterns: [],
+      begin: "(?<={)",
+      end: "(?=[,}])",
+      name: "meta.field.ddlog.dl",
+      patterns: [
+        {
+          begin: "(?<=[,{])",
+          end: ":",
+        },
+        {
+          begin: "(?<=:)",
+          end: "(?=})",
+        },
+      ],
     };
   }
 
