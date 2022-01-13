@@ -1231,7 +1231,7 @@ export class DDlogDl implements basis.Render {
     return {
       begin: "{",
       end: "}",
-      name: "meta.statement.block.ddlog.dl",
+      name: "meta.statement_block.ddlog.dl",
       patterns: [
         {
           name: "punctuation.terminator.statement.ddlog.dl",
@@ -1258,7 +1258,7 @@ export class DDlogDl implements basis.Render {
           name: "keyword.control.loop.ddlog.dl",
         },
       },
-      name: "meta.statement.for.ddlog.dl",
+      name: "meta.statement_for.ddlog.dl",
       patterns: [
         {
           begin: "\\(",
@@ -1285,7 +1285,7 @@ export class DDlogDl implements basis.Render {
           name: "keyword.control.conditional.ddlog.dl",
         },
       },
-      name: "meta.statement.if.ddlog.dl",
+      name: "meta.statement_if.ddlog.dl",
       patterns: [
         {
           begin: "\\(",
@@ -1322,7 +1322,7 @@ export class DDlogDl implements basis.Render {
           name: "keyword.control.match.ddlog.dl",
         },
       },
-      name: "meta.statement.match.ddlog.dl",
+      name: "meta.statement_match.ddlog.dl",
       patterns: [
         {
           begin: "\\(",
@@ -1472,7 +1472,7 @@ export class DDlogDl implements basis.Render {
           name: "support.type.primitive.ddlog.dl",
         },
       },
-      name: "meta.type.bit.ddlog.dl",
+      name: "meta.type_bit.ddlog.dl",
       patterns: [
         {
           begin: "<",
@@ -1531,7 +1531,7 @@ export class DDlogDl implements basis.Render {
           name: "support.type.primitive.ddlog.dl",
         },
       },
-      name: "meta.type.signed.ddlog.dl",
+      name: "meta.type_signed.ddlog.dl",
       patterns: [
         {
           begin: "<",
@@ -1588,7 +1588,7 @@ export class DDlogDl implements basis.Render {
           name: "support.type.primitive.ddlog.dl",
         },
       },
-      name: "meta.type.user.ddlog.dl",
+      name: "meta.type_user.ddlog.dl",
       patterns: [
         {
           begin: "<",
@@ -1620,7 +1620,7 @@ export class DDlogDl implements basis.Render {
           name: "storage.type.typedef.ddlog.dl",
         },
       },
-      name: "meta.typedef.ddlog.dl",
+      name: "meta.typedef_normal.ddlog.dl",
       patterns: [
         {
           begin: `\\s*(${Rx.ident_scoped})`,
