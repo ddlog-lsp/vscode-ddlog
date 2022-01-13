@@ -1650,7 +1650,7 @@ export class DDlogDl implements basis.Render {
       patterns: [
         {
           begin: `\\s*(${Rx.ident_scoped})`,
-          end: `(?=${Rx.item.lookahead})`,
+          end: `(?=[=])`,
           beginCaptures: {
             1: {
               name: "support.class.relation.ddlog.dl support.type.relation.ddlg.dl entity.name.class.ddlog.dl entity.name.type.ddlog.dl storage.type.relation.ddlog.dl",
@@ -1660,12 +1660,25 @@ export class DDlogDl implements basis.Render {
             {
               begin: "<",
               end: ">",
+              patterns: [
+                {
+                  begin: "(?<=[<])",
+                  end: "(?=[,>])",
+                  patterns: [include(this.name_var_type)],
+                },
+              ],
             },
+          ],
+        },
+        {
+          begin: "=",
+          end: `(?=${Rx.item.lookahead})`,
+          patterns: [
             {
-              match: "=",
-              end: "",
+              begin: "(?<=[=|])",
+              end: `(?=${Rx.item.lookahead})`,
+              patterns: [include(this.type)],
             },
-            include(this.type),
           ],
         },
       ],
