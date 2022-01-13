@@ -6,6 +6,9 @@
   ],
   "patterns": [
     {
+      "include": "#comment"
+    },
+    {
       "include": "#EXTRAS"
     },
     {
@@ -38,6 +41,13 @@
       ]
     },
     "apply": {
+      "begin": "\\bapply\\b",
+      "end": "(?=(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "beginCaptures": {
+        "0": {
+          "name": "storage.type.apply.ddlog.dl"
+        }
+      },
       "patterns": []
     },
     "arg": {
@@ -52,20 +62,26 @@
     "atom": {
       "patterns": []
     },
-    "atom_elem": {
-      "patterns": []
-    },
-    "atom_pos": {
-      "patterns": []
-    },
-    "atom_rec": {
-      "patterns": []
-    },
     "attribute": {
       "patterns": []
     },
     "attributes": {
       "patterns": []
+    },
+    "comment": {
+      "name": "comment.block.ddlog.dl",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.ddlog.dl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.ddlog.dl"
+        }
+      }
     },
     "comment_block": {
       "name": "comment.block.ddlog.dl",
@@ -101,12 +117,6 @@
     "cons": {
       "patterns": []
     },
-    "cons_pos": {
-      "patterns": []
-    },
-    "cons_rec": {
-      "patterns": []
-    },
     "escape_sequence": {
       "patterns": []
     },
@@ -114,7 +124,158 @@
       "patterns": []
     },
     "exp": {
-      "patterns": []
+      "patterns": [
+        {
+          "include": "#exp_add"
+        },
+        {
+          "include": "#exp_assign"
+        },
+        {
+          "include": "#exp_binding"
+        },
+        {
+          "include": "#exp_bit_and"
+        },
+        {
+          "include": "#exp_bit_neg"
+        },
+        {
+          "include": "#exp_bit_or"
+        },
+        {
+          "include": "#exp_bit_slice"
+        },
+        {
+          "include": "#exp_bit_xor"
+        },
+        {
+          "include": "#exp_block"
+        },
+        {
+          "include": "#exp_break"
+        },
+        {
+          "include": "#exp_cast"
+        },
+        {
+          "include": "#exp_cat"
+        },
+        {
+          "include": "#exp_cond"
+        },
+        {
+          "include": "#exp_continue"
+        },
+        {
+          "include": "#exp_cons_pos"
+        },
+        {
+          "include": "#exp_cons_rec"
+        },
+        {
+          "include": "#exp_decl_var"
+        },
+        {
+          "include": "#exp_div"
+        },
+        {
+          "include": "#exp_eq"
+        },
+        {
+          "include": "#exp_field"
+        },
+        {
+          "include": "#exp_for"
+        },
+        {
+          "include": "#exp_fun_call"
+        },
+        {
+          "include": "#exp_fun_call_dot"
+        },
+        {
+          "include": "#exp_gt"
+        },
+        {
+          "include": "#exp_gteq"
+        },
+        {
+          "include": "#exp_lambda"
+        },
+        {
+          "include": "#exp_lit"
+        },
+        {
+          "include": "#exp_log_and"
+        },
+        {
+          "include": "#exp_log_imp"
+        },
+        {
+          "include": "#exp_log_neg"
+        },
+        {
+          "include": "#exp_log_or"
+        },
+        {
+          "include": "#exp_lt"
+        },
+        {
+          "include": "#exp_lteq"
+        },
+        {
+          "include": "#exp_match"
+        },
+        {
+          "include": "#exp_mul"
+        },
+        {
+          "include": "#exp_neg"
+        },
+        {
+          "include": "#exp_neq"
+        },
+        {
+          "include": "#exp_proj"
+        },
+        {
+          "include": "#exp_ref"
+        },
+        {
+          "include": "#exp_rem"
+        },
+        {
+          "include": "#exp_return"
+        },
+        {
+          "include": "#exp_seq"
+        },
+        {
+          "include": "#exp_shl"
+        },
+        {
+          "include": "#exp_shr"
+        },
+        {
+          "include": "#exp_slice"
+        },
+        {
+          "include": "#exp_sub"
+        },
+        {
+          "include": "#exp_try"
+        },
+        {
+          "include": "#exp_tuple"
+        },
+        {
+          "include": "#exp_type"
+        },
+        {
+          "include": "#exp_wild"
+        }
+      ]
     },
     "exp_add": {
       "patterns": []
@@ -201,7 +362,23 @@
       "patterns": []
     },
     "exp_lit": {
-      "patterns": []
+      "patterns": [
+        {
+          "include": "#lit_bool"
+        },
+        {
+          "include": "#lit_num"
+        },
+        {
+          "include": "#lit_map"
+        },
+        {
+          "include": "#lit_string"
+        },
+        {
+          "include": "#lit_vec"
+        }
+      ]
     },
     "exp_log_and": {
       "patterns": []
@@ -275,17 +452,54 @@
     "exp_wild": {
       "patterns": []
     },
+    "extern_function_transformer_typedef": {
+      "begin": "\\bextern\\b",
+      "end": "(?=(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "beginCaptures": {
+        "0": {
+          "name": "variable.other.readwrite.ddlog.dl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#function_normal"
+        },
+        {
+          "include": "#transformer"
+        },
+        {
+          "include": "#typedef_normal"
+        }
+      ]
+    },
     "field": {
-      "patterns": []
-    },
-    "function": {
-      "patterns": []
-    },
-    "function_extern": {
-      "patterns": []
+      "begin": "(?<={)",
+      "end": "(?=[,}])",
+      "name": "meta.field.ddlog.dl",
+      "patterns": [
+        {
+          "begin": "(?<=[,{])",
+          "end": ":"
+        },
+        {
+          "begin": "(?<=:)",
+          "end": "(?=})"
+        }
+      ]
     },
     "function_normal": {
-      "patterns": []
+      "begin": "\\bfunction\\b",
+      "end": "(?=(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "beginCaptures": {
+        "0": {
+          "name": "storage.type.function.ddlog.dl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#name_func"
+        }
+      ]
     },
     "function_normal_branch_0": {
       "patterns": []
@@ -293,25 +507,35 @@
     "function_normal_branch_1": {
       "patterns": []
     },
-    "ident": {
-      "patterns": []
-    },
-    "ident_lower": {
-      "patterns": []
-    },
-    "ident_lower_scoped": {
-      "patterns": []
-    },
-    "ident_upper": {
-      "patterns": []
-    },
-    "ident_upper_scoped": {
-      "patterns": []
-    },
     "import": {
-      "patterns": []
+      "begin": "\\bimport\\b",
+      "end": "(?=(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.control.import.ddlog.dl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "match": "\\s*\\bas\\b",
+          "name": "keyword.control.import.as.ddlog.dl"
+        },
+        {
+          "include": "#module_path"
+        }
+      ]
     },
     "index": {
+      "begin": "\\bindex\\b",
+      "end": "(?=(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "beginCaptures": {
+        "0": {
+          "name": "storage.type.index.ddlog.dl"
+        }
+      },
       "patterns": []
     },
     "interpolation": {
@@ -320,7 +544,28 @@
     "item": {
       "patterns": [
         {
+          "include": "#extern_function_transformer_typedef"
+        },
+        {
           "include": "#statement_for"
+        },
+        {
+          "include": "#apply"
+        },
+        {
+          "include": "#import"
+        },
+        {
+          "include": "#function_normal"
+        },
+        {
+          "include": "#index"
+        },
+        {
+          "include": "#rel"
+        },
+        {
+          "include": "#typedef_normal"
         }
       ]
     },
@@ -328,7 +573,8 @@
       "patterns": []
     },
     "lit_bool": {
-      "patterns": []
+      "match": "\\b(false|true)\\b",
+      "name": "constant.language.boolean.ddlog.ts"
     },
     "lit_map": {
       "patterns": []
@@ -390,11 +636,13 @@
     "lit_vec": {
       "patterns": []
     },
-    "module_alias": {
-      "patterns": []
-    },
     "module_path": {
-      "patterns": []
+      "match": "\\s*(\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "captures": {
+        "1": {
+          "name": "variable.other.readwrite.alias.ddlog.dl"
+        }
+      }
     },
     "name": {
       "patterns": []
@@ -409,13 +657,19 @@
       "patterns": []
     },
     "name_func": {
-      "patterns": []
+      "match": "\\s*(\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-z_][a-zA-Z0-9_]*\\b)",
+      "captures": {
+        "1": {
+          "name": "entity.name.function.ddlog.dl support.function.ddlog.dl"
+        }
+      }
     },
     "name_index": {
       "patterns": []
     },
     "name_rel": {
-      "patterns": []
+      "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[A-Z][a-zA-Z0-9_]*\\b",
+      "name": "support.class.relation.ddlog.dl support.type.relation.ddlg.dl entity.name.class.ddlog.dl entity.name.type.ddlog.dl storage.type.relation.ddlog.dl"
     },
     "name_trans": {
       "patterns": []
@@ -427,10 +681,30 @@
       "patterns": []
     },
     "name_var_type": {
-      "patterns": []
+      "match": "'[A-Z][a-zA-Z0-9_]*",
+      "name": "storage.type.generic.ddlog.dl meta.name_var_type"
     },
     "pat": {
-      "patterns": []
+      "patterns": [
+        {
+          "include": "#pat_cons"
+        },
+        {
+          "include": "#pat_term_decl_var"
+        },
+        {
+          "include": "#pat_lit"
+        },
+        {
+          "include": "#pat_tuple"
+        },
+        {
+          "include": "#pat_type"
+        },
+        {
+          "include": "#pat_wild"
+        }
+      ]
     },
     "pat_cons": {
       "patterns": []
@@ -442,7 +716,17 @@
       "patterns": []
     },
     "pat_lit": {
-      "patterns": []
+      "patterns": [
+        {
+          "include": "#lit_bool"
+        },
+        {
+          "include": "#lit_num"
+        },
+        {
+          "include": "#lit_string"
+        }
+      ]
     },
     "pat_term_decl_var": {
       "patterns": []
@@ -457,19 +741,52 @@
       "patterns": []
     },
     "rel": {
-      "patterns": []
-    },
-    "rel_args": {
-      "patterns": []
-    },
-    "rel_elem": {
-      "patterns": []
+      "patterns": [
+        {
+          "include": "#rel_role"
+        },
+        {
+          "include": "#rel_semantics"
+        },
+        {
+          "match": "&"
+        },
+        {
+          "include": "#name_rel"
+        }
+      ]
     },
     "rel_role": {
-      "patterns": []
+      "patterns": [
+        {
+          "match": "\\binput\\b",
+          "name": "storage.modifier.relation.role.ddlog.dl"
+        },
+        {
+          "match": "\\binternal\\b",
+          "name": "storage.modifier.relation.role.ddlog.dl"
+        },
+        {
+          "match": "\\boutput\\b",
+          "name": "storage.modifier.relation.role.ddlog.dl"
+        }
+      ]
     },
     "rel_semantics": {
-      "patterns": []
+      "patterns": [
+        {
+          "match": "\\brelation\\b",
+          "name": "storage.type.relation.semantics.ddlog.dl"
+        },
+        {
+          "match": "\\bstream\\b",
+          "name": "storage.type.relation.semantics.ddlog.dl"
+        },
+        {
+          "match": "\\bmultiset\\b",
+          "name": "storage.type.relation.semantics.ddlog.dl"
+        }
+      ]
     },
     "rhs": {
       "patterns": []
@@ -523,6 +840,7 @@
     "statement_block": {
       "begin": "{",
       "end": "}",
+      "name": "meta.statement_block.ddlog.dl",
       "patterns": [
         {
           "name": "punctuation.terminator.statement.ddlog.dl",
@@ -545,6 +863,7 @@
           "name": "keyword.control.loop.ddlog.dl"
         }
       },
+      "name": "meta.statement_for.ddlog.dl",
       "patterns": [
         {
           "begin": "\\(",
@@ -577,6 +896,7 @@
           "name": "keyword.control.conditional.ddlog.dl"
         }
       },
+      "name": "meta.statement_if.ddlog.dl",
       "patterns": [
         {
           "begin": "\\(",
@@ -607,13 +927,58 @@
       ]
     },
     "statement_insert": {
-      "patterns": []
+      "patterns": [
+        {
+          "include": "#atom"
+        }
+      ]
     },
     "statement_match": {
-      "patterns": []
+      "begin": "\\bmatch\\b",
+      "end": "(?<=})",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.control.match.ddlog.dl"
+        }
+      },
+      "name": "meta.statement_match.ddlog.dl",
+      "patterns": [
+        {
+          "begin": "\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#exp"
+            }
+          ]
+        },
+        {
+          "begin": "{",
+          "end": "}",
+          "patterns": [
+            {
+              "name": "punctuation.terminator.match-arm.ddlog.dl",
+              "match": ","
+            }
+          ]
+        }
+      ]
     },
     "statement_match_arm": {
-      "patterns": []
+      "begin": "(?=(_|false|true|var|[0-9])\\b|\"|\\(|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "end": "(?<=skip|\\})",
+      "patterns": [
+        {
+          "include": "#pat"
+        },
+        {
+          "match": "->",
+          "name": "punctuation.separator.match-arm.ddlog.dl"
+        },
+        {
+          "include": "#statement"
+        }
+      ]
     },
     "string_quoted": {
       "patterns": []
@@ -640,28 +1005,128 @@
       "patterns": []
     },
     "transformer": {
+      "begin": "\\btransformer\\b",
+      "end": "(?=(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "beginCaptures": {
+        "0": {
+          "name": "storage.type.transformer.ddlog.dl"
+        }
+      },
       "patterns": []
     },
     "type": {
-      "patterns": []
+      "patterns": [
+        {
+          "include": "#type_bit"
+        },
+        {
+          "include": "#type_signed"
+        },
+        {
+          "include": "#type_bigint"
+        },
+        {
+          "include": "#type_double"
+        },
+        {
+          "include": "#type_float"
+        },
+        {
+          "include": "#type_string"
+        },
+        {
+          "include": "#type_bool"
+        },
+        {
+          "include": "#type_union"
+        },
+        {
+          "include": "#type_user"
+        },
+        {
+          "include": "#type_var"
+        },
+        {
+          "include": "#type_fun"
+        },
+        {
+          "include": "#type_tuple"
+        }
+      ]
     },
     "type_atom": {
-      "patterns": []
+      "patterns": [
+        {
+          "include": "#type_bit"
+        },
+        {
+          "include": "#type_signed"
+        },
+        {
+          "include": "#type_bigint"
+        },
+        {
+          "include": "#type_double"
+        },
+        {
+          "include": "#type_float"
+        },
+        {
+          "include": "#type_string"
+        },
+        {
+          "include": "#type_bool"
+        },
+        {
+          "include": "#type_user"
+        },
+        {
+          "include": "#type_var"
+        },
+        {
+          "include": "#type_fun"
+        },
+        {
+          "include": "#type_tuple"
+        }
+      ]
     },
     "type_bigint": {
-      "patterns": []
+      "match": "\\bbigint\\b",
+      "name": "support.type.primitive.ddlog.dl"
     },
     "type_bit": {
-      "patterns": []
+      "begin": "\\bbit\\b",
+      "end": "(?<=>)",
+      "beginCaptures": {
+        "0": {
+          "name": "support.type.primitive.ddlog.dl"
+        }
+      },
+      "name": "meta.type_bit.ddlog.dl",
+      "patterns": [
+        {
+          "begin": "<",
+          "end": ">",
+          "patterns": [
+            {
+              "include": "#lit_num_dec"
+            }
+          ]
+        }
+      ]
     },
     "type_bool": {
-      "patterns": []
+      "match": "\\bbool\\b",
+      "name": "support.type.primitive.ddlog.dl"
     },
     "type_double": {
-      "patterns": []
+      "match": "\\bdouble\\b",
+      "name": "support.type.primitive.ddlog.dl"
     },
     "type_float": {
-      "patterns": []
+      "match": "\\bfloat\\b",
+      "name": "support.type.primitive.ddlog.dl"
     },
     "type_fun": {
       "patterns": []
@@ -673,10 +1138,29 @@
       "patterns": []
     },
     "type_signed": {
-      "patterns": []
+      "begin": "\\bsigned\\b",
+      "end": "(?<=>)",
+      "beginCaptures": {
+        "0": {
+          "name": "support.type.primitive.ddlog.dl"
+        }
+      },
+      "name": "meta.type_signed.ddlog.dl",
+      "patterns": [
+        {
+          "begin": "<",
+          "end": ">",
+          "patterns": [
+            {
+              "include": "#lit_num_dec"
+            }
+          ]
+        }
+      ]
     },
     "type_string": {
-      "patterns": []
+      "match": "\\bstring\\b",
+      "name": "support.type.primitive.ddlog.dl"
     },
     "type_trans": {
       "patterns": []
@@ -694,22 +1178,100 @@
       "patterns": []
     },
     "type_user": {
-      "patterns": []
+      "begin": "\\s*(?!.*(:-|,|\\.)\\s*$)(\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "end": "(?<=[>}])|(?=[|]|(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "beginCaptures": {
+        "0": {
+          "name": "support.type.primitive.ddlog.dl"
+        }
+      },
+      "name": "meta.type_user.ddlog.dl",
+      "patterns": [
+        {
+          "begin": "<",
+          "end": ">",
+          "patterns": [
+            {
+              "match": ","
+            },
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        {
+          "begin": "{",
+          "end": "}",
+          "patterns": [
+            {
+              "begin": "(?<=[,{])",
+              "end": ",|(?=})",
+              "patterns": [
+                {
+                  "include": "#field"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     "type_var": {
-      "patterns": []
-    },
-    "typedef": {
-      "patterns": []
-    },
-    "typedef_extern": {
-      "patterns": []
+      "match": "'\\b[A-Z][a-zA-Z0-9_]*\\b",
+      "name": "storage.type.generic.ddlog.dl"
     },
     "typedef_normal": {
-      "patterns": []
-    },
-    "word": {
-      "patterns": []
+      "begin": "\\btypedef\\b",
+      "end": "(?=(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+      "beginCaptures": {
+        "0": {
+          "name": "storage.type.typedef.ddlog.dl"
+        }
+      },
+      "name": "meta.typedef_normal.ddlog.dl",
+      "patterns": [
+        {
+          "begin": "\\s*(\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+          "end": "(?=[=])",
+          "beginCaptures": {
+            "1": {
+              "name": "support.class.relation.ddlog.dl support.type.relation.ddlg.dl entity.name.class.ddlog.dl entity.name.type.ddlog.dl storage.type.relation.ddlog.dl"
+            }
+          },
+          "patterns": [
+            {
+              "begin": "<",
+              "end": ">",
+              "patterns": [
+                {
+                  "begin": "(?<=[<])",
+                  "end": "(?=[,>])",
+                  "patterns": [
+                    {
+                      "include": "#name_var_type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "=",
+          "end": "(?=(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+          "patterns": [
+            {
+              "begin": "(?<=[=|])",
+              "end": "(?=(apply|extern|f(or|unction)|i(mport|n(dex|put|ternal))|output|typedef)\\b|\\b([a-zA-Z_][a-zA-Z0-9_]*\\s*::\\s*)*[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+              "patterns": [
+                {
+                  "include": "#type"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   }
 }
